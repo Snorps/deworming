@@ -3,6 +3,10 @@ extends Area2D
 signal hit
 signal swing
 
+var slashSound1 = preload("res://Assets/Sounds/Slash.wav")
+var slashSound2 = preload("res://Assets/Sounds/Slash2.wav")
+var slashSound3 = preload("res://Assets/Sounds/Slash3.wav")
+
 export var velocityStep = 160 # How fast the player will move (pixels/sec).
 export var velocityMultiplier = 0.75
 export var meleeCooldown = 0.7
@@ -78,6 +82,8 @@ func _input(event):
 			lastMeleeTime = OS.get_ticks_msec()
 			$HeldItemContainer/HeldItem/Melee.set_collision_layer_bit(0, 1)
 			$HeldItemContainer/HeldItem/Melee/MeleeSprite.play("swing")
+			$AudioStreamPlayer2D.stream = slashSound1
+			$AudioStreamPlayer2D.play()
 			var time_in_seconds = 0.03
 			yield(get_tree().create_timer(time_in_seconds), "timeout")
 			velocity += $HeldItemContainer.get_global_transform().x.normalized() * 600
