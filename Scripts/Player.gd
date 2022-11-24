@@ -76,6 +76,7 @@ func _process(delta):
 	
 func _input(event):
 	if event is InputEventMouseButton:
+		$HeldItemContainer/HeldItem/Melee.set_collision_layer_bit(0, 1)
 		$HeldItemContainer/HeldItem/Melee/MeleeSprite.play("swing")
 	elif event is InputEventMouseMotion:
 		$HeldItemContainer.look_at(event.position)
@@ -87,3 +88,6 @@ func _input(event):
 
 func _on_Melee_animation_finished():
 	$HeldItemContainer/HeldItem/Melee/MeleeSprite.play("default")
+	var t = Timer.new()
+	t.set_wait_time(1)
+	$HeldItemContainer/HeldItem/Melee.set_collision_layer_bit(0, 0)
