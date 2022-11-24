@@ -5,6 +5,8 @@ signal swing
 
 export var velocityStep = 160 # How fast the player will move (pixels/sec).
 export var velocityMultiplier = 0.75
+export var meleeCooldown = 0.7
+
 var screen_size # Size of the game window
 
 var velocity = Vector2.ZERO # The player's movement vector.
@@ -69,11 +71,16 @@ func _process(delta):
 	
 	
 	
-	
+var lastMeleeTime = 0
 func _input(event):
 	if event is InputEventMouseButton:
-		$HeldItemContainer/HeldItem/Melee.set_collision_layer_bit(0, 1)
-		$HeldItemContainer/HeldItem/Melee/MeleeSprite.play("swing")
+		if lastMeleeTime < OS.get_ticks_msec() - (meleeCooldown * 1000):
+			lastMeleeTime = OS.get_ticks_msec()
+			$HeldItemContainer/HeldItem/Melee.set_collision_layer_bit(0, 1)
+			$HeldItemContainer/HeldItem/Melee/MeleeSprite.play("swing")
+			var time_in_seconds = 0.03
+			yield(get_tree().create_timer(time_in_seconds), "timeout")
+			velocity += $HeldItemContainer.get_global_transform().x.normalized() * 600
 	elif event is InputEventMouseMotion:
 		$HeldItemContainer.look_at(event.position)
 		
