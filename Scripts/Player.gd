@@ -29,26 +29,22 @@ func _on_Player_body_entered(body):
 #func _process(delta):
 #	pass
 
-var walking
 func _process(delta):
 	ticksSinceHurt = ticksSinceHurt - 1
 	if ticksSinceHurt <= 0:
 		# $CollisionShape2D.set_deferred("enabled", true)
 		var delet = 1
 	
-	walking = false
+	var walkingdir = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
-		walking = true
-		velocity.x += velocityStep
+		walkingdir.x += 1
 	if Input.is_action_pressed("move_left"):
-		walking = true
-		velocity.x -= velocityStep
+		walkingdir.x -= 1
 	if Input.is_action_pressed("move_down"):
-		walking = true
-		velocity.y += velocityStep
+		walkingdir.y += 1
 	if Input.is_action_pressed("move_up"):
-		walking = true
-		velocity.y -= velocityStep
+		walkingdir.y -= 1
+	velocity += walkingdir.normalized() * velocityStep
 
 	velocity = velocity * velocityMultiplier
 	
@@ -57,7 +53,7 @@ func _process(delta):
 	position.y = clamp(position.y, 0, screen_size.y)
 
 	# ANIMATION STUFFs
-	if walking:
+	if walkingdir != Vector2.ZERO:
 		$AnimatedSprite.play()
 	else:
 		$AnimatedSprite.stop()
