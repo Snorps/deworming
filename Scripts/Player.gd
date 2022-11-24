@@ -11,7 +11,7 @@ var velocity = Vector2.ZERO # The player's movement vector.
 
 func _ready():
 	screen_size = get_viewport_rect().size
-	velocity = Vector2.ZERO # The player's movement vector.
+	velocity = Vector2.ZERO # The player's movement vector. when you WHEN YOU WHEN YOU
 
 
 var ticksSinceHurt = 15
