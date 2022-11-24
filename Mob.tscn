@@ -30,3 +30,5 @@ frames = SubResource( 1 )
 polygon = PoolVector2Array( -31, -18, -30, 11, -9, 19, 16, -17 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_Mob_body_entered"]

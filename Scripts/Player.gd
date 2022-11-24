@@ -1,6 +1,7 @@
 extends Area2D
 
 signal hit
+signal swing
 
 export var velocityStep = 160 # How fast the player will move (pixels/sec).
 export var velocityMultiplier = 0.75
@@ -12,6 +13,7 @@ var velocity = Vector2.ZERO # The player's movement vector.
 func _ready():
 	screen_size = get_viewport_rect().size
 	velocity = Vector2.ZERO # The player's movement vector. when you WHEN YOU WHEN YOU
+	
 
 
 var ticksSinceHurt = 15
@@ -69,3 +71,19 @@ func _process(delta):
 		$AnimatedSprite.animation = "default"
 		$AnimatedSprite.flip_v = velocity.y > 0
 	
+	
+	
+	
+func _input(event):
+	if event is InputEventMouseButton:
+		$HeldItemContainer/HeldItem/Melee/MeleeSprite.play("swing")
+	elif event is InputEventMouseMotion:
+		$HeldItemContainer.look_at(event.position)
+		
+	# print("Viewport Resolution is: ", get_viewport_rect().size)
+	
+
+
+
+func _on_Melee_animation_finished():
+	$HeldItemContainer/HeldItem/Melee/MeleeSprite.play("default")
