@@ -1,8 +1,36 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Mob.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Mob.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Sprites/MobDead.png" type="Texture" id=3]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform vec4 colour : hint_color;
+uniform bool active;
+
+void fragment() {
+    if(active == true) {
+
+        vec4 curr_color = texture(TEXTURE,UV); // Get current color of pixel
+
+        if (curr_color.a == 1.0f){
+            COLOR.rgb = colour.rgb;//vec3(0.238, 0.118, 0.418);
+        }else{
+            COLOR = curr_color;
+        }
+    }
+    else{
+        COLOR = texture(TEXTURE,UV);
+    }
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = SubResource( 2 )
+shader_param/colour = Color( 1, 1, 1, 1 )
+shader_param/active = null
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -23,6 +51,7 @@ gravity_scale = 0.0
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 3 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 1 )
 
