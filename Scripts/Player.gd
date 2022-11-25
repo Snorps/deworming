@@ -4,8 +4,6 @@ signal hit
 signal swing
 
 var slashSound1 = preload("res://Assets/Sounds/Slash.wav")
-var slashSound2 = preload("res://Assets/Sounds/Slash2.wav")
-var slashSound3 = preload("res://Assets/Sounds/Slash3.wav")
 
 export var velocityStep = 160 # How fast the player will move (pixels/sec).
 export var velocityMultiplier = 0.75
@@ -78,6 +76,7 @@ func _process(delta):
 var lastMeleeTime = 0
 func _input(event):
 	if event is InputEventMouseButton:
+		yield(get_tree().create_timer(0.2), "timeout")
 		if lastMeleeTime < OS.get_ticks_msec() - (meleeCooldown * 1000):
 			lastMeleeTime = OS.get_ticks_msec()
 			$HeldItemContainer/HeldItem/Melee.set_collision_layer_bit(0, 1)

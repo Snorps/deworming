@@ -11,8 +11,12 @@ config_version=4
 [application]
 
 config/name="Jame Gam #24"
-run/main_scene="res://Game.tscn"
+run/main_scene="res://Game_Container.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GameVars="*res://Scripts/Game_Vars.gd"
 
 [gui]
 

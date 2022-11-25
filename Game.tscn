@@ -9,7 +9,7 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 1082.61, -62.3988, 0, 0, 0, 0, 1082.61, 624.286, 0, 0, 0, 0, -175.396, 645.323, 0, 0, 0, 0, -267.126, -26.2402, 0, 0, 0, 0, 1080.8, -59.4404 )
 }
 
-[node name="Game" type="Node"]
+[node name="Game" type="Node" groups=["Game"]]
 script = ExtResource( 1 )
 mob_scene = ExtResource( 2 )
 

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Game_Container.gd" type="Script" id=1]
+[ext_resource path="res://Game.tscn" type="PackedScene" id=2]
+
+[node name="Game_Container" type="Node"]
+script = ExtResource( 1 )
+gameScene = ExtResource( 2 )
