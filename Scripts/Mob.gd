@@ -2,10 +2,13 @@ extends RigidBody2D
 
 signal hit
 
+enum State {dead, default}
+var state
 
 func _on_Area2D_area_entered(area):
-	if area.name == "Melee":
+	if area.name == "Melee" and not state == State.dead:
 		$AnimatedSprite.play("dead")
+		state = State.dead
 		emit_signal("hit")
 		
 		$AnimatedSprite.material.set_shader_param("active", true)
