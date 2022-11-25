@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Mob.tscn" type="PackedScene" id=2]
@@ -9,6 +9,8 @@
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 1082.61, -62.3988, 0, 0, 0, 0, 1082.61, 624.286, 0, 0, 0, 0, -175.396, 645.323, 0, 0, 0, 0, -267.126, -26.2402, 0, 0, 0, 0, 1080.8, -59.4404 )
 }
+
+[sub_resource type="ImageTexture" id=2]
 
 [node name="Game" type="Node" groups=["Game"]]
 script = ExtResource( 1 )
@@ -45,6 +47,15 @@ offset = 1246.82
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 538, 286 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_rotation = -88.0547
+rect_scale = Vector2( 5, 5 )
+size_flags_stretch_ratio = 0.62
+texture = SubResource( 2 )
+stretch_mode = 2
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]

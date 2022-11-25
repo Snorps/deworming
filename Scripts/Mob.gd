@@ -26,13 +26,13 @@ func _on_Area2D_area_entered(area):
 # var a = 2
 # var b = "text"
 
-
+var velocity
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var velocity = Vector2(rand_range(150.0, 250.0), 0.0)
+	velocity = rand_range(300.0, 450.0)
 	look_at(Vector2(300,300))
-	set_linear_velocity(get_global_transform().x.normalized() * 350)
-
+	set_linear_velocity(get_global_transform().x.normalized() * velocity)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -40,5 +40,9 @@ func _ready():
 
 
 func _on_VisibilityNotifier2D_screen_exited():
-	queue_free()
+	var viewport = get_viewport().size
+	# var pos = $ScreenBumpNotifier.position
+	rotation_degrees = 180 - abs(rotation_degrees)
+	set_linear_velocity(get_global_transform().x.normalized() * velocity)
+	
 

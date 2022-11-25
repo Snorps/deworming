@@ -61,8 +61,8 @@ rotation = 0.548562
 z_index = 1
 polygon = PoolVector2Array( -30, -18, -30, 11, -9, 19, 15, -17 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 0, -3 )
+[node name="ScreenBumpNotifier" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 156, -5 )
 scale = Vector2( 3.9, 3.8 )
 
 [node name="HurtHitbox" type="Area2D" parent="."]
@@ -71,4 +71,5 @@ rotation = 0.535321
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtHitbox"]
 polygon = PoolVector2Array( -34, -38, -37, 14, 10, 32, 41, -30 )
 
+[connection signal="screen_exited" from="ScreenBumpNotifier" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="area_entered" from="HurtHitbox" to="." method="_on_Area2D_area_entered"]
