@@ -11,6 +11,10 @@ func _on_Area2D_area_entered(area):
 		state = State.dead
 		emit_signal("hit")
 		
+		set_collision_layer_bit(0, 1)
+		set_linear_damp(2)
+		
+		
 		$AnimatedSprite.material.set_shader_param("active", true)
 		get_tree().paused = true
 		var time_in_seconds = 0.1
@@ -25,7 +29,9 @@ func _on_Area2D_area_entered(area):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	var velocity = Vector2(rand_range(150.0, 250.0), 0.0)
+	look_at(Vector2(300,300))
+	set_linear_velocity(get_global_transform().x.normalized() * 350)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
