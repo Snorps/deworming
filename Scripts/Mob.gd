@@ -13,6 +13,7 @@ func _on_Area2D_area_entered(area):
 		
 		set_collision_layer_bit(0, 1)
 		set_linear_damp(2)
+		z_index = 0
 		
 		
 		$AnimatedSprite.material.set_shader_param("active", true)
