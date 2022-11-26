@@ -8,3 +8,17 @@ script = ExtResource( 1 )
 gameScene = ExtResource( 2 )
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Node2D" type="Node2D" parent="."]
+z_index = -15
+
+[node name="Label" type="Label" parent="Node2D"]
+margin_left = 132.0
+margin_top = 420.0
+margin_right = 288.0
+margin_bottom = 434.0
+rect_scale = Vector2( 5, 5 )
+text = "click anywhere to pingas"
+align = 1
+
+[node name="SoundPlayer" type="AudioStreamPlayer" parent="."]

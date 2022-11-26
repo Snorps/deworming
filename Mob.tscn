@@ -1,36 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Mob.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Mob.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Sprites/MobDead.png" type="Texture" id=3]
-
-[sub_resource type="Shader" id=2]
-code = "shader_type canvas_item;
-
-uniform vec4 colour : hint_color;
-uniform bool active;
-
-void fragment() {
-    if(active == true) {
-
-        vec4 curr_color = texture(TEXTURE,UV); // Get current color of pixel
-
-        if (curr_color.a == 1.0f){
-            COLOR.rgb = colour.rgb;//vec3(0.238, 0.118, 0.418);
-        }else{
-            COLOR = curr_color;
-        }
-    }
-    else{
-        COLOR = texture(TEXTURE,UV);
-    }
-}"
-
-[sub_resource type="ShaderMaterial" id=3]
-resource_local_to_scene = true
-shader = SubResource( 2 )
-shader_param/colour = Color( 1, 1, 1, 1 )
-shader_param/active = null
+[ext_resource path="res://Shaders/Hurt.tres" type="Material" id=4]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -51,7 +24,7 @@ gravity_scale = 0.0
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-material = SubResource( 3 )
+material = ExtResource( 4 )
 rotation = 0.541817
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 1 )
@@ -70,6 +43,13 @@ rotation = 0.535321
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtHitbox"]
 polygon = PoolVector2Array( -34, -38, -37, 14, 10, 32, 41, -30 )
+
+[node name="AttackHitbox" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackHitbox"]
+rotation = 0.548562
+z_index = 1
+polygon = PoolVector2Array( -30, -18, -30, 11, -9, 19, 15, -17 )
 
 [connection signal="screen_exited" from="ScreenBumpNotifier" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="area_entered" from="HurtHitbox" to="." method="_on_Area2D_area_entered"]

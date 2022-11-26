@@ -1,0 +1,29 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform vec4 colour : hint_color;
+uniform bool active;
+
+void fragment() {
+    if(active == true) {
+
+        vec4 curr_color = texture(TEXTURE,UV); // Get current color of pixel
+
+        if (curr_color.a == 1.0f){
+            COLOR.rgb = colour.rgb;//vec3(0.238, 0.118, 0.418);
+        }else{
+            COLOR = curr_color;
+        }
+    }
+    else{
+        COLOR = texture(TEXTURE,UV);
+    }
+}"
+
+[resource]
+resource_local_to_scene = true
+shader = SubResource( 2 )
+shader_param/colour = Color( 1, 1, 1, 1 )
+shader_param/active = null
