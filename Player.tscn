@@ -57,13 +57,12 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = ExtResource( 11 )
 position = Vector2( 2.99999, 5.5 )
-scale = Vector2( 0.336842, 0.334211 )
+scale = Vector2( 0.25, 0.25 )
 z_index = 2
 frames = SubResource( 1 )
-animation = "dead"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-scale = Vector2( 3, 3 )
+scale = Vector2( 4, 4 )
 shape = SubResource( 2 )
 
 [node name="HeldItemContainer" type="Node2D" parent="."]
