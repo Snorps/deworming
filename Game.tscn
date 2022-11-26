@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
-[ext_resource path="res://Mob.tscn" type="PackedScene" id=2]
+[ext_resource path="res://HUD.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Sprites/bg1intestinessmall.png" type="Texture" id=4]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -14,7 +14,6 @@ _data = {
 
 [node name="Game" type="Node" groups=["Game"]]
 script = ExtResource( 1 )
-mob_scene = ExtResource( 2 )
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -59,6 +58,8 @@ margin_bottom = 607.0
 texture = ExtResource( 4 )
 expand = true
 stretch_mode = 2
+
+[node name="Node" parent="." instance=ExtResource( 5 )]
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
