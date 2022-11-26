@@ -9,6 +9,7 @@ gameScene = ExtResource( 2 )
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -20.0
+stream_paused = true
 
 [node name="Node2D" type="Node2D" parent="."]
 z_index = -15
@@ -24,3 +25,4 @@ align = 1
 
 [node name="SoundPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -15.0
+stream_paused = true
