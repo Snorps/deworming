@@ -22,6 +22,7 @@ var velocity = Vector2.ZERO # The player's movement vector.
 
 func _ready():
 	screen_size = get_viewport_rect().size
+	GameVars.player = self
 	
 
 

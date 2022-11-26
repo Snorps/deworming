@@ -42,7 +42,8 @@ func _ready():
 func _on_VisibilityNotifier2D_screen_exited():
 	var viewport = get_viewport().size
 	# var pos = $ScreenBumpNotifier.position
-	rotation_degrees = 180 - abs(rotation_degrees)
+	#rotation_degrees = 180 - abs(rotation_degrees)
+	look_at(GameVars.player.position)
 	set_linear_velocity(get_global_transform().x.normalized() * velocity)
 	
 
