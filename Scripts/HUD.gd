@@ -32,8 +32,8 @@ func updateHearts():
 var prevHealth
 func _ready():
 	w = $TextureRect.rect_size.x
-	prevHealth = GameVars.player.health
-	updateHearts()
+#	prevHealth = GameVars.player.health
+	#updateHearts()
 
 
 func _process(delta):

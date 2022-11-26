@@ -1,5 +1,7 @@
 extends Area2D
 
+export(PackedScene) var levelScene
+
 signal hit
 signal swing
 
@@ -15,15 +17,16 @@ export var velocityStep = 160 # How fast the player will move (pixels/sec).
 export var velocityMultiplier = 0.75
 export var meleeCooldown = 0.7
 
-var screen_size # Size of the game window
+var level_size # Size of the game window
 
 var velocity = Vector2.ZERO # The player's movement vector.
 
+var viewportSize
 
 func _ready():
-	screen_size = get_viewport_rect().size
+	level_size = Vector2(2500,1500)
+	viewportSize = get_viewport().size
 	GameVars.player = self
-	
 
 
 var ticksSinceHurt = 15
@@ -67,8 +70,8 @@ func _process(delta):
 		velocity = velocity * velocityMultiplier
 		
 		position += velocity * delta
-		position.x = clamp(position.x, 0, screen_size.x)
-		position.y = clamp(position.y, 0, screen_size.y)
+		position.x = clamp(position.x, -level_size.x/2, level_size.x/2)
+		position.y = clamp(position.y, -level_size.y/2, level_size.y/2)
 
 		# ANIMATION STUFFs
 		if walkingdir != Vector2.ZERO:
@@ -86,6 +89,20 @@ func _process(delta):
 			$AnimatedSprite.flip_v = velocity.y > 0
 	
 	
+func getClampedPosition():
+	var pos = Vector2(position.x, position.y)
+	var upperbounds = level_size/2 - (viewportSize/2)
+	var lowerbounds = -level_size/2 + (viewportSize/2)
+	var s = pos.sign()
+	
+	#pos = Vector2(abs(pos.x),abs(pos.y)) - bounds
+	#pos = s * pos
+	
+	pos.x = clamp(pos.x, lowerbounds.x, upperbounds.x)
+	pos.y = clamp(pos.y, lowerbounds.y, upperbounds.y)
+		
+	print(position, pos, upperbounds, viewportSize)
+	return pos
 	
 var lastMeleeTime = 0
 func _input(event):
@@ -101,9 +118,8 @@ func _input(event):
 			yield(get_tree().create_timer(time_in_seconds), "timeout")
 			velocity += $HeldItemContainer.get_global_transform().x.normalized() * 600
 	elif event is InputEventMouseMotion:
-		$HeldItemContainer.look_at(event.position)
+		$HeldItemContainer.look_at(GameVars.camera.get_global_mouse_position())
 		
-	# print("Viewport Resolution is: ", get_viewport_rect().size)
 	
 
 
