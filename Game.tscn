@@ -25,13 +25,6 @@ wait_time = 0.5
 wait_time = 0.5
 one_shot = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 1030.0
-margin_bottom = 607.0
-texture = ExtResource( 4 )
-expand = true
-stretch_mode = 2
-
 [node name="StartPosition" type="Position2D" parent="."]
 position = Vector2( 542, 287 )
 
@@ -55,6 +48,16 @@ rect_rotation = -88.0547
 rect_scale = Vector2( 5, 5 )
 size_flags_stretch_ratio = 0.62
 texture = SubResource( 2 )
+stretch_mode = 2
+
+[node name="Background" type="Node2D" parent="."]
+z_index = -10
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+margin_right = 1030.0
+margin_bottom = 607.0
+texture = ExtResource( 4 )
+expand = true
 stretch_mode = 2
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
