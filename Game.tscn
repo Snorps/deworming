@@ -1,19 +1,21 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://HUD.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
+[ext_resource path="res://Mob.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Sprites/bg1intestinessmall.png" type="Texture" id=4]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 1082.61, -62.3988, 0, 0, 0, 0, 1082.61, 624.286, 0, 0, 0, 0, -175.396, 645.323, 0, 0, 0, 0, -267.126, -26.2402, 0, 0, 0, 0, 1080.8, -59.4404 )
+"points": PoolVector2Array( 0, 0, 0, 0, 1073.57, -53.5237, 0, 0, 0, 0, 1082.61, 624.286, 0, 0, 0, 0, -175.396, 645.323, 0, 0, 0, 0, -267.126, -26.2402, 0, 0, 0, 0, 1027.53, -39.3719 )
 }
 
 [sub_resource type="ImageTexture" id=2]
 
 [node name="Game" type="Node" groups=["Game"]]
 script = ExtResource( 1 )
+mob_scene = ExtResource( 2 )
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -28,13 +30,13 @@ one_shot = true
 position = Vector2( 542, 287 )
 
 [node name="MobPath" type="Path2D" parent="."]
-position = Vector2( -626.842, -580.173 )
-scale = Vector2( 2.21303, 3.04215 )
+position = Vector2( -197.413, -515.878 )
+scale = Vector2( 1.84777, 2.76742 )
 curve = SubResource( 1 )
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
-position = Vector2( 522.316, 633.656 )
-rotation = 3.12488
+position = Vector2( 513.512, 633.803 )
+rotation = 3.12487
 offset = 1246.82
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
