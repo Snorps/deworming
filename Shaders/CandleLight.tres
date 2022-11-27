@@ -4,7 +4,7 @@
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/pos = null
-shader_param/screenSize = null
+shader_param/pos = Vector2( 500, 500 )
+shader_param/screenSize = Vector2( 1024, 600 )
 shader_param/circleSize = 400.0
 shader_param/bwRimSize = 40.0
