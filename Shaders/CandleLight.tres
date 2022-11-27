@@ -1,10 +1,15 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
 
 [ext_resource path="res://Shaders/CandleLight.gdshader" type="Shader" id=1]
+[ext_resource path="res://Assets/Sprites/grunge_paint.png" type="Texture" id=2]
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/pos = Vector2( 500, 500 )
+shader_param/pos = Vector2( 538, 286 )
 shader_param/screenSize = Vector2( 1024, 600 )
-shader_param/circleSize = 400.0
-shader_param/bwRimSize = 40.0
+shader_param/circleInnerSize = 100.0
+shader_param/circleFadeSize = 110.0
+shader_param/circleFadeOuterSize = 120.0
+shader_param/circleDarknessSize = 130.0
+shader_param/bwRimSize = 0.0
+shader_param/vignetteTexture = ExtResource( 2 )
