@@ -74,8 +74,8 @@ position = Vector2( 45, 0 )
 collision_mask = 0
 
 [node name="MeleeSprite" type="AnimatedSprite" parent="HeldItemContainer/HeldItem/Melee"]
-position = Vector2( 15, 0 )
-scale = Vector2( 0.4, 0.4 )
+position = Vector2( 20.5, 0 )
+scale = Vector2( 0.205, 0.4 )
 frames = SubResource( 4 )
 animation = "swing"
 frame = 6
@@ -85,7 +85,11 @@ playing = true
 position = Vector2( 15, -1.19209e-07 )
 shape = SubResource( 3 )
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="WailPlayer" type="AudioStreamPlayer2D" parent="."]
+pause_mode = 2
+volume_db = -22.0
+
+[node name="SoundPlayer" type="AudioStreamPlayer2D" parent="."]
 pause_mode = 2
 volume_db = -15.0
 

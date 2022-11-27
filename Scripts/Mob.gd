@@ -18,7 +18,7 @@ func _on_Area2D_area_entered(area):
 		
 		$AnimatedSprite.material.set_shader_param("active", true)
 		get_tree().paused = true
-		var time_in_seconds = 0.1
+		var time_in_seconds = 0.06
 		yield(get_tree().create_timer(time_in_seconds), "timeout")
 		get_tree().paused = false
 		$AnimatedSprite.material.set_shader_param("active", false)
@@ -32,7 +32,7 @@ var velocity
 func _ready():
 	rand.randomize()
 	
-	velocity = rand_range(300.0, 450.0)
+	velocity = rand_range(150.0, 250.0)
 	
 	look_at(GameVars.player.position)
 	var r = rand.randfn(0.1, 0.4) * 30

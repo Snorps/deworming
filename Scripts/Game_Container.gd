@@ -2,7 +2,6 @@ extends Node
 
 export(PackedScene) var gameScene
 
-var music = preload("res://Assets/Sounds/musicb.mp3")
 var gameOverSound = preload("res://Assets/Sounds/GameOver.wav")
 
 var game
@@ -28,6 +27,6 @@ func _process(_delta):
 		GameVars.state = GameVars.State.MENU
 		$SoundPlayer.stream = gameOverSound
 		$SoundPlayer.play()
-		yield(get_tree().create_timer(4), "timeout")
+		yield(get_tree().create_timer(5), "timeout")
 		if is_instance_valid(game):
 			game.queue_free()
