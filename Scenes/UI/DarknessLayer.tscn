@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Shaders/CandleLight.tres" type="Material" id=1]
-[ext_resource path="res://Scripts/LightSource.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/LightSource.gd" type="Script" id=1]
+[ext_resource path="res://Shaders/CandleLight.tres" type="Material" id=2]
 
 [node name="DarknessLayer" type="CanvasLayer"]
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 
 [node name="ScreenShaderFilter" type="ColorRect" parent="."]
-material = ExtResource( 1 )
+material = ExtResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2

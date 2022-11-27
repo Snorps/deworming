@@ -1,9 +1,8 @@
 extends Node
 
 export(PackedScene) var mobScene
+export(PackedScene) var holeScene
 export var mobDensity = 0.4
-
-const holeScene = preload("res://Hole.tscn")
 
 func randomSign():
 	return (round(randf())*2)-1
