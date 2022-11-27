@@ -28,14 +28,16 @@ func _on_Mob_area_entered(area):
 		get_tree().paused = true
 		var time_in_seconds = 0.06
 		yield(get_tree().create_timer(time_in_seconds), "timeout")
-		get_tree().paused = false
 		$AnimatedSprite.material.set_shader_param("active", false)
+		get_tree().paused = false
+		$StunSprite.visible = false
 	
 
 func _on_Mob_body_entered(body):
 	if body.name == "Candle" and state != State.DEAD:
 		if GlobalVars.player.heldItem != body: #messyyy
-			if abs(body.linear_velocity.x) > 0.1 or abs(body.linear_velocity.y) > 0.1:
+			print(body.linear_velocity)
+			if abs(body.linear_velocity.x) > 0.2 or abs(body.linear_velocity.y) > 0.2:
 				state = State.STUNNED
 				$StunSprite.visible = true
 				yield(get_tree().create_timer(stunTime), "timeout")
