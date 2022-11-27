@@ -20,3 +20,4 @@ func _process(delta):
 	if prevHealth != GameVars.player.health:
 		updateHearts()
 	prevHealth = GameVars.player.health
+	$FloorDisplay.text = "Floor " + str(GameVars.floorCount)

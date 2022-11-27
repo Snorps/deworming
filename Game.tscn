@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Mob.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Sprites/bg1intestinessmall.png" type="Texture" id=4]
+[ext_resource path="res://Level.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Camera.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Sprites/nodule.png" type="Texture" id=6]
 
@@ -14,7 +14,8 @@ _data = {
 
 [node name="Game" type="Node" groups=["Game"]]
 script = ExtResource( 1 )
-mob_scene = ExtResource( 2 )
+mobScene = ExtResource( 2 )
+levelScene = ExtResource( 4 )
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -41,15 +42,6 @@ offset = 2404.43
 [node name="Background" type="Node2D" parent="."]
 z_index = -10
 
-[node name="BackgroundTexture" type="TextureRect" parent="Background"]
-margin_left = -4233.0
-margin_top = -2152.0
-margin_right = 3778.0
-margin_bottom = 2508.0
-texture = ExtResource( 4 )
-expand = true
-stretch_mode = 2
-
 [node name="Nodule" type="Sprite" parent="."]
 position = Vector2( -1.52588e-05, 3.99998 )
 scale = Vector2( 0.273684, 0.289474 )
@@ -59,6 +51,8 @@ texture = ExtResource( 6 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 538, 286 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]

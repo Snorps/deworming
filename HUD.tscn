@@ -6,12 +6,6 @@
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
 
-[node name="HeartContainer" type="ReferenceRect" parent="."]
-margin_left = 46.0
-margin_top = 41.0
-margin_right = 457.0
-margin_bottom = 181.0
-
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_left = 47.0
 margin_top = 40.0
@@ -21,7 +15,7 @@ rect_scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 2 )
 stretch_mode = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="FloorDisplay" type="Label" parent="."]
 margin_left = 713.0
 margin_top = 35.0
 margin_right = 1283.0
