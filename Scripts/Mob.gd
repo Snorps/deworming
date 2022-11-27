@@ -9,6 +9,7 @@ export var velocityStep = 20
 export var velocityMultiplier = 0.9
 export var visionDistance = 400
 export var stunTime = 3
+export var health = 2
 
 var state
 var velocity = Vector2.ZERO
@@ -16,14 +17,15 @@ var velocity = Vector2.ZERO
 
 func _on_Mob_area_entered(area):
 	if area.name == "Melee" and state != State.DEAD:
-		$AnimatedSprite.play("dead")
-		state = State.DEAD
-		emit_signal("hit")
-		
-		set_collision_layer_bit(0, 1)
-		set_linear_damp(2)
-		z_index = -2
-		
+		if health <= 1 or state == State.STUNNED:
+			$AnimatedSprite.play("dead")
+			
+			state = State.DEAD
+			emit_signal("hit")
+			
+			set_collision_layer_bit(0, 1)
+			set_linear_damp(2)
+			z_index = -2
 		$AnimatedSprite.material.set_shader_param("active", true)
 		get_tree().paused = true
 		var time_in_seconds = 0.06
@@ -31,6 +33,7 @@ func _on_Mob_area_entered(area):
 		$AnimatedSprite.material.set_shader_param("active", false)
 		get_tree().paused = false
 		$StunSprite.visible = false
+		health = health - 1
 	
 
 func _on_Mob_body_entered(body):
