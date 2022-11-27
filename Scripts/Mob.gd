@@ -38,12 +38,11 @@ func _ready():
 #func _process(delta):
 #	pass
 
-
-func _on_VisibilityNotifier2D_screen_exited():
-	var viewport = get_viewport().size
-	# var pos = $ScreenBumpNotifier.position
-	#rotation_degrees = 180 - abs(rotation_degrees)
-	look_at(GameVars.player.position)
-	set_linear_velocity(get_global_transform().x.normalized() * velocity)
-	
-
+#func flip():
+#	look_at(GameVars.player.position)
+#	set_linear_velocity(get_global_transform().x.normalized() * velocity)
+#
+#func _process(_delta):
+#	var ls = GameVars.levelSize
+#	if abs(position.x) > ls.x/2 or abs(position.y) > ls.y/2:
+#		flip()

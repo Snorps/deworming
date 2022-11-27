@@ -19,19 +19,26 @@ func _on_StartTimer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
 	
+	
 func _on_MobTimer_timeout():
-	# Create a new instance of the Mob scene.
 	var mob = mob_scene.instance()
+	var ls = GameVars.levelSize
+	#var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
+	#mob_spawn_location.offset = randi()
+	
+	var mobPos = Vector2(randf()*ls.x, randf()*ls.y)
+	mobPos = mobPos - (ls/2)
 
-	# Choose a random location on Path2D.
-	var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
-	mob_spawn_location.offset = randi()
+	if randf() > 0.75:
+		mobPos.x = -ls.x/2
+	elif randf() > 0.5:
+		mobPos.y = -ls.y/2
+	elif randf() > 0.25:
+		mobPos.x = ls.x/2
+	else:
+		mobPos.y = ls.y/2
 
+	print(ls/2, mobPos)
 
-	# Set the mob's position to a random location.
-	mob.position = mob_spawn_location.position
-
-
-
-	# Spawn the mob by adding it to the Main scene.
+	mob.position = mobPos
 	add_child(mob)

@@ -17,14 +17,13 @@ export var velocityStep = 160 # How fast the player will move (pixels/sec).
 export var velocityMultiplier = 0.75
 export var meleeCooldown = 0.7
 
-var level_size # Size of the game window
+var level_size = GameVars.levelSize
 
 var velocity = Vector2.ZERO # The player's movement vector.
 
 var viewportSize
 
 func _ready():
-	level_size = Vector2(2500,1500)
 	viewportSize = get_viewport().size
 	GameVars.player = self
 
@@ -101,7 +100,6 @@ func getClampedPosition():
 	pos.x = clamp(pos.x, lowerbounds.x, upperbounds.x)
 	pos.y = clamp(pos.y, lowerbounds.y, upperbounds.y)
 		
-	print(position, pos, upperbounds, viewportSize)
 	return pos
 	
 var lastMeleeTime = 0

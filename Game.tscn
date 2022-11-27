@@ -9,7 +9,7 @@
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 1073.57, -53.5237, 0, 0, 0, 0, 1082.61, 624.286, 0, 0, 0, 0, -175.396, 645.323, 0, 0, 0, 0, -158.81, -68.7836, 0, 0, 0, 0, 1027.53, -39.3719 )
+"points": PoolVector2Array( 0, 0, 0, 0, 1073.57, -53.5237, 0, 0, 0, 0, 1089.11, 555.133, 0, 0, 0, 0, 1082.61, 624.286, 0, 0, 0, 0, -175.396, 645.323, 0, 0, 0, 0, -158.81, -68.7836, 0, 0, 0, 0, 1027.53, -39.3719 )
 }
 
 [node name="Game" type="Node" groups=["Game"]]
@@ -29,14 +29,14 @@ one_shot = true
 position = Vector2( 542, 287 )
 
 [node name="MobPath" type="Path2D" parent="."]
-position = Vector2( -3355.2, -3158.33 )
-scale = Vector2( 8.65058, 10.2884 )
+position = Vector2( -10571, -7603.36 )
+scale = Vector2( 23.6663, 29.3332 )
 curve = SubResource( 1 )
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
-position = Vector2( 513.512, 633.803 )
-rotation = 3.12487
-offset = 1246.82
+position = Vector2( -164.383, 171.154 )
+rotation = -1.54757
+offset = 2404.43
 
 [node name="Background" type="Node2D" parent="."]
 z_index = -10
