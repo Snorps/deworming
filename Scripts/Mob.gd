@@ -4,6 +4,7 @@ signal hit
 
 enum State {dead, default}
 var state
+var rand = RandomNumberGenerator.new()
 
 func _on_Area2D_area_entered(area):
 	if area.name == "Melee" and not state == State.dead:
@@ -29,8 +30,15 @@ func _on_Area2D_area_entered(area):
 var velocity
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	rand.randomize()
+	
 	velocity = rand_range(300.0, 450.0)
-	look_at(Vector2(300,300))
+	
+	look_at(GameVars.player.position)
+	var r = rand.randfn(0.1, 0.4) * 30
+	rotation_degrees = rotation_degrees + r
+	print(r)
+	
 	set_linear_velocity(get_global_transform().x.normalized() * velocity)
 	
 
@@ -38,12 +46,11 @@ func _ready():
 #func _process(delta):
 #	pass
 
-
-func _on_VisibilityNotifier2D_screen_exited():
-	var viewport = get_viewport().size
-	# var pos = $ScreenBumpNotifier.position
-	#rotation_degrees = 180 - abs(rotation_degrees)
-	look_at(GameVars.player.position)
-	set_linear_velocity(get_global_transform().x.normalized() * velocity)
-	
-
+#func flip():
+#	look_at(GameVars.player.position)
+#	set_linear_velocity(get_global_transform().x.normalized() * velocity)
+#
+#func _process(_delta):
+#	var ls = GameVars.levelSize
+#	if abs(position.x) > ls.x/2 or abs(position.y) > ls.y/2:
+#		flip()
