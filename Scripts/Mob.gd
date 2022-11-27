@@ -37,7 +37,6 @@ func _ready():
 	look_at(GameVars.player.position)
 	var r = rand.randfn(0.1, 0.4) * 30
 	rotation_degrees = rotation_degrees + r
-	print(r)
 	
 	set_linear_velocity(get_global_transform().x.normalized() * velocity)
 	

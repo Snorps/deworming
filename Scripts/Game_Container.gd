@@ -26,7 +26,6 @@ func _input(event):
 func _process(_delta):
 	if GameVars.state == GameVars.State.GAME_OVER:
 		GameVars.state = GameVars.State.MENU
-		print(GameVars.state)
 		$SoundPlayer.stream = gameOverSound
 		$SoundPlayer.play()
 		yield(get_tree().create_timer(4), "timeout")
