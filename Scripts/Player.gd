@@ -20,7 +20,7 @@ export var velocityMultiplier = 0.8
 export var meleeCooldown = 0.2
 export var meleeCarrythrough = 500
 
-var level_size = GameVars.levelSize
+var level_size = GlobalVars.levelSize
 
 var velocity = Vector2.ZERO # The player's movement vector.
 
@@ -28,7 +28,7 @@ var viewportSize
 
 func _ready():
 	viewportSize = get_viewport().size
-	GameVars.player = self
+	GlobalVars.player = self
 
 
 var ticksSinceHurt = 15
@@ -62,7 +62,7 @@ func _process(delta):
 		$AnimatedSprite.play("dead")
 		$AnimatedSprite.z_index = -1
 		state = PlayerState.DEAD
-		GameVars.state = GameVars.State.GAME_OVER
+		GlobalVars.state = GlobalVars.State.GAME_OVER
 	
 	if state != PlayerState.DEAD:
 		var walkingdir = Vector2.ZERO
@@ -126,7 +126,7 @@ func _input(event):
 			yield(get_tree().create_timer(time_in_seconds), "timeout")
 			velocity += $HeldItemContainer.get_global_transform().x.normalized() * meleeCarrythrough
 	elif event is InputEventMouseMotion:
-		$HeldItemContainer.look_at(GameVars.camera.get_global_mouse_position())
+		$HeldItemContainer.look_at(GlobalVars.camera.get_global_mouse_position())
 		
 	
 

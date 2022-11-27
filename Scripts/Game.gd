@@ -3,6 +3,7 @@ extends Node
 export(PackedScene) var mobScene
 export(PackedScene) var levelScene
 var score
+var floors
 var level
 
 func nextLevel():
@@ -11,18 +12,20 @@ func nextLevel():
 		level.queue_free()
 	level = levelScene.instance()
 	add_child(level)
-	GameVars.state = GameVars.State.PLAYING
-	GameVars.floorCount = GameVars.floorCount + 1
+	GlobalVars.state = GlobalVars.State.PLAYING
+	floors = floors + 1
 	#$AudioStreamPlayer.stream = descendSound
 	#$AudioStreamPlayer.play()
 
 func _ready():
+	floors = 0
+	GlobalVars.game = self
 	randomize()
 	nextLevel()
 	new_game()
 
 func _process(_delta):
-	if GameVars.state == GameVars.State.NEXT_LEVEL:
+	if GlobalVars.state == GlobalVars.State.NEXT_LEVEL:
 		nextLevel()
 
 func _on_ScoreTimer_timeout():
@@ -40,7 +43,7 @@ func _on_StartTimer_timeout():
 	
 func _on_MobTimer_timeout():
 	var mob = mobScene.instance()
-	var ls = GameVars.levelSize
+	var ls = GlobalVars.levelSize
 	#var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
 	#mob_spawn_location.offset = randi()
 	

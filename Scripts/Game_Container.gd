@@ -15,16 +15,16 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseButton:
-		if GameVars.state == GameVars.State.MENU:
-			GameVars.state = GameVars.State.PLAYING
+		if GlobalVars.state == GlobalVars.State.MENU:
+			GlobalVars.state = GlobalVars.State.PLAYING
 			game = gameScene.instance()
 			add_child(game)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if GameVars.state == GameVars.State.GAME_OVER:
-		GameVars.state = GameVars.State.MENU
+	if GlobalVars.state == GlobalVars.State.GAME_OVER:
+		GlobalVars.state = GlobalVars.State.MENU
 		$SoundPlayer.stream = gameOverSound
 		$SoundPlayer.play()
 		yield(get_tree().create_timer(5), "timeout")

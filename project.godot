@@ -16,7 +16,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GameVars="*res://Scripts/Game_Vars.gd"
+GlobalVars="*res://Scripts/Global_Vars.gd"
 
 [gui]
 

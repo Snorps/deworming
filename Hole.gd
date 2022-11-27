@@ -18,5 +18,5 @@ func _ready():
 
 func _on_Area2D_area_entered(area):
 	if area.name == "Player":
-		GameVars.state = GameVars.State.NEXT_LEVEL
+		GlobalVars.state = GlobalVars.State.NEXT_LEVEL
 

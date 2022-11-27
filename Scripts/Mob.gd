@@ -34,7 +34,7 @@ func _ready():
 	
 	velocity = rand_range(150.0, 250.0)
 	
-	look_at(GameVars.player.position)
+	look_at(GlobalVars.player.position)
 	var r = rand.randfn(0.1, 0.4) * 30
 	rotation_degrees = rotation_degrees + r
 	
@@ -46,10 +46,10 @@ func _ready():
 #	pass
 
 #func flip():
-#	look_at(GameVars.player.position)
+#	look_at(GlobalVars.player.position)
 #	set_linear_velocity(get_global_transform().x.normalized() * velocity)
 #
 #func _process(_delta):
-#	var ls = GameVars.levelSize
+#	var ls = GlobalVars.levelSize
 #	if abs(position.x) > ls.x/2 or abs(position.y) > ls.y/2:
 #		flip()

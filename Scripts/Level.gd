@@ -7,7 +7,7 @@ func randomSign():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var ls = GameVars.levelSize
+	var ls = GlobalVars.levelSize
 	var pos = Vector2(randomSign()*(randf()*(ls.x/2))*0.9, randomSign()*(randf()*(ls.y/2))*0.9)
 	
 	

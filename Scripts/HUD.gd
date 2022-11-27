@@ -3,7 +3,7 @@ extends Node
 var w
 
 func updateHearts():
-	var health = GameVars.player.health
+	var health = GlobalVars.player.health
 	$TextureRect.rect_size.x = w * health
 	$TextureRect.show()
 	if health < 1:
@@ -12,12 +12,12 @@ func updateHearts():
 var prevHealth
 func _ready():
 	w = $TextureRect.rect_size.x
-#	prevHealth = GameVars.player.health
+#	prevHealth = GlobalVars.player.health
 	#updateHearts()
 
 
 func _process(delta):
-	if prevHealth != GameVars.player.health:
+	if prevHealth != GlobalVars.player.health:
 		updateHearts()
-	prevHealth = GameVars.player.health
-	$FloorDisplay.text = "Floor " + str(GameVars.floorCount)
+	prevHealth = GlobalVars.player.health
+	$FloorDisplay.text = "Floor " + str(GlobalVars.game.floors)
