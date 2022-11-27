@@ -15,6 +15,5 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var node = get_node(targetPath)
-	print(node)
 	$ScreenShaderFilter.material.set_shader_param("screenSize", get_viewport().size);
-	$ScreenShaderFilter.material.set_shader_param("pos", node.position)
+	$ScreenShaderFilter.material.set_shader_param("pos", node.get_global_transform_with_canvas().origin)
