@@ -16,9 +16,6 @@ _data = {
 script = ExtResource( 1 )
 levelScene = ExtResource( 4 )
 
-[node name="MobTimer" type="Timer" parent="."]
-wait_time = 0.5
-
 [node name="ScoreTimer" type="Timer" parent="."]
 
 [node name="StartTimer" type="Timer" parent="."]
@@ -56,6 +53,5 @@ position = Vector2( 378, 188 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 5 )]
 
-[connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]

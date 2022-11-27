@@ -14,6 +14,17 @@ export var health = 2
 var state
 var velocity = Vector2.ZERO
 
+func showDamage(pos):
+	var knockback = 150
+	
+	$AnimatedSprite.material.set_shader_param("active", true)
+	get_tree().paused = true
+	var vectorTo = (get_global_position() - pos).normalized()
+	velocity += vectorTo * knockback
+	yield(get_tree().create_timer(0.06), "timeout")
+	
+	$AnimatedSprite.material.set_shader_param("active", false)
+	get_tree().paused = false
 
 func _on_Mob_area_entered(area):
 	if area.name == "Melee" and state != State.DEAD:
@@ -26,27 +37,24 @@ func _on_Mob_area_entered(area):
 			set_collision_layer_bit(0, 1)
 			set_linear_damp(2)
 			z_index = -2
-		$AnimatedSprite.material.set_shader_param("active", true)
-		get_tree().paused = true
-		var time_in_seconds = 0.06
-		yield(get_tree().create_timer(time_in_seconds), "timeout")
-		$AnimatedSprite.material.set_shader_param("active", false)
-		get_tree().paused = false
-		$StunSprite.visible = false
+			$StunSprite.visible = false
+		showDamage(area.get_global_position())
 		health = health - 1
 	
 
 func _on_Mob_body_entered(body):
 	if body.name == "Candle" and state != State.DEAD:
 		if GlobalVars.player.heldItem != body: #messyyy
-			print(body.linear_velocity)
-			if abs(body.linear_velocity.x) > 0.2 or abs(body.linear_velocity.y) > 0.2:
+			if abs(body.linear_velocity.x) > 0.5 or abs(body.linear_velocity.y) > 0.5:
 				state = State.STUNNED
 				$StunSprite.visible = true
-				yield(get_tree().create_timer(stunTime), "timeout")
-				if state == State.STUNNED:
+				showDamage(body.get_global_position())
+				
+				yield(get_tree().create_timer(stunTime), "timeout") # wait several seconds
+				
+				if state == State.STUNNED: #if still stunned, unstun
+					$StunSprite.visible = false
 					state = State.DEFAULT
-				$StunSprite.visible = false
 		
 	
 
@@ -73,10 +81,15 @@ func _process(delta):
 			
 		velocity += walkingdir.normalized() * velocityStep
 
-		velocity = velocity * velocityMultiplier
-		
-		position += velocity * delta
-		
-		#position.x = clamp(position.x, -level_size.x/2, level_size.x/2)
-		#position.y = clamp(position.y, -level_size.y/2, level_size.y/2)
+		if velocity.x != 0:
+			$AnimatedSprite.animation = "walk"
+			$AnimatedSprite.flip_v = false
+			# See the note below about boolean assignment.
+			$AnimatedSprite.flip_h = velocity.x < 0
+		elif velocity.y != 0:
+			$AnimatedSprite.animation = "default"
+			$AnimatedSprite.flip_v = velocity.y > 0
+			
+	velocity = velocity * velocityMultiplier
+	position += velocity * delta
 

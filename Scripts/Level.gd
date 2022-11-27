@@ -15,7 +15,6 @@ func randomPos():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var mobCount = round(((GlobalVars.levelSize.x * GlobalVars.levelSize.y)/100000)*mobDensity)
-	print(mobCount)
 	for i in mobCount:
 		var mob = mobScene.instance()
 		mob.position = randomPos()

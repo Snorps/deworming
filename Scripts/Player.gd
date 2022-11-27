@@ -110,10 +110,6 @@ var noThrowAfterGrabTime = 0.001
 func grab(object):
 	heldItem = object
 	lastGrabTime = OS.get_ticks_msec()
-	#object.get_parent().remove_child(object)
-	#$HeldItemContainer/HeldItem.add_child(object)
-	#print(object.name, "  ", object.get_parent())
-	#print($HeldItemContainer/HeldItem/Candle.Sprite.name)
 
 	
 func getClampedPosition():

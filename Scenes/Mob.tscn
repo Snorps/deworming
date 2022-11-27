@@ -58,6 +58,7 @@ shape = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 10.5 )
+scale = Vector2( 1.5, 1.5 )
 shape = SubResource( 2 )
 
 [node name="StunSprite" type="AnimatedSprite" parent="."]
@@ -65,7 +66,7 @@ visible = false
 position = Vector2( 1, -56 )
 scale = Vector2( 0.221053, 0.221053 )
 frames = SubResource( 3 )
-frame = 4
+frame = 5
 playing = true
 
 [connection signal="area_entered" from="." to="." method="_on_Mob_area_entered"]

@@ -7,7 +7,6 @@ var floors
 var level
 
 func nextLevel():
-	print(level)
 	if level != null:
 		level.queue_free()
 	level = levelScene.instance()
@@ -37,7 +36,6 @@ func new_game():
 	$StartTimer.start()
 
 func _on_StartTimer_timeout():
-	$MobTimer.start()
 	$ScoreTimer.start()
 	
 	
