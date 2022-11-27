@@ -33,7 +33,6 @@ func _ready():
 
 var ticksSinceHurt = 15
 func _on_Player_area_entered(area):
-	print(area.name)
 	if ticksSinceHurt <= 0 and area.name == "AttackHitbox" and state != PlayerState.DEAD:
 		if area.get_owner().state != area.get_owner().State.DEAD:
 			ticksSinceHurt = 65
@@ -129,8 +128,6 @@ func _input(event):
 			$HeldItemContainer/HeldItem/Melee.set_collision_mask(0)
 	elif event is InputEventMouseMotion:
 		$HeldItemContainer.look_at(GlobalVars.camera.get_global_mouse_position())
-		
-	
 
 
 
