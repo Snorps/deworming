@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
+[ext_resource path="res://Candle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Level.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Camera.tscn" type="PackedScene" id=5]
@@ -45,12 +46,15 @@ position = Vector2( -1.52588e-05, 3.99998 )
 scale = Vector2( 0.273684, 0.289474 )
 texture = ExtResource( 6 )
 
-[node name="Camera2D" parent="." instance=ExtResource( 5 )]
-
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 538, 286 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Candle" parent="." instance=ExtResource( 2 )]
+position = Vector2( 378, 188 )
+
+[node name="Camera2D" parent="." instance=ExtResource( 5 )]
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]

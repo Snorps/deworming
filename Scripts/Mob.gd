@@ -2,19 +2,20 @@ extends Area2D
 
 signal hit
 
-enum State {DEAD, DEFAULT}
+enum State {DEAD, DEFAULT, STUNNED}
 var rand = RandomNumberGenerator.new()
 
 export var velocityStep = 20
 export var velocityMultiplier = 0.9
 export var visionDistance = 400
+export var stunTime = 3
 
 var state
 var velocity = Vector2.ZERO
 
 
 func _on_Mob_area_entered(area):
-	if area.name == "Melee" and not state == State.DEAD:
+	if area.name == "Melee" and state != State.DEAD:
 		$AnimatedSprite.play("dead")
 		state = State.DEAD
 		emit_signal("hit")
@@ -31,12 +32,26 @@ func _on_Mob_area_entered(area):
 		$AnimatedSprite.material.set_shader_param("active", false)
 	
 
+func _on_Mob_body_entered(body):
+	if body.name == "Candle" and state != State.DEAD:
+		if GlobalVars.player.heldItem != body: #messyyy
+			if abs(body.linear_velocity.x) > 0.1 or abs(body.linear_velocity.y) > 0.1:
+				state = State.STUNNED
+				$StunSprite.visible = true
+				yield(get_tree().create_timer(stunTime), "timeout")
+				if state == State.STUNNED:
+					state = State.DEFAULT
+				$StunSprite.visible = false
+		
+	
+
 func _ready():
+	state = State.DEFAULT
 	rand.randomize()
 	
 	
 func _process(delta):
-	if state != State.DEAD:
+	if state == State.DEFAULT:
 		var walkingdir = Vector2.ZERO
 		var p = GlobalVars.player
 		if p.position.x > position.x:
@@ -59,3 +74,4 @@ func _process(delta):
 		
 		#position.x = clamp(position.x, -level_size.x/2, level_size.x/2)
 		#position.y = clamp(position.y, -level_size.y/2, level_size.y/2)
+

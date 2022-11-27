@@ -10,15 +10,19 @@ var hitSound = preload("res://Assets/Sounds/PlayerHit.wav")
 var hurtSound = preload("res://Assets/Sounds/PlayerWail.wav")
 var hurtSoundLast = preload("res://Assets/Sounds/PlayerWailLast.wav")
 
-var health = 3
 
 enum PlayerState {DEFAULT, DEAD}
 var state = PlayerState.DEFAULT
+var heldItem = null
 
+export var health = 5
 export var velocityStep = 80 
 export var velocityMultiplier = 0.8
 export var meleeCooldown = 0.2
 export var meleeCarrythrough = 500
+
+export var throwForce = 2000
+
 
 var level_size = GlobalVars.levelSize
 
@@ -33,9 +37,8 @@ func _ready():
 
 var ticksSinceHurt = 15
 func _on_Player_area_entered(area):
-	print(area.name)
 	if ticksSinceHurt <= 0 and area.name == "AttackHitbox" and state != PlayerState.DEAD:
-		if area.get_owner().state != area.get_owner().State.DEAD:
+		if area.get_owner().state == area.get_owner().State.DEFAULT:
 			ticksSinceHurt = 65
 			emit_signal("hit")
 			health = health - 1
@@ -64,6 +67,9 @@ func _process(delta):
 		$AnimatedSprite.z_index = -1
 		state = PlayerState.DEAD
 		GlobalVars.state = GlobalVars.State.GAME_OVER
+	
+	if is_instance_valid(heldItem):
+		heldItem.position = $HeldItemContainer/HeldItem.get_global_position()
 	
 	if state != PlayerState.DEAD:
 		var walkingdir = Vector2.ZERO
@@ -99,6 +105,17 @@ func _process(delta):
 			$AnimatedSprite.flip_v = velocity.y > 0
 	
 	
+var lastGrabTime = 0
+var noThrowAfterGrabTime = 0.001
+func grab(object):
+	heldItem = object
+	lastGrabTime = OS.get_ticks_msec()
+	#object.get_parent().remove_child(object)
+	#$HeldItemContainer/HeldItem.add_child(object)
+	#print(object.name, "  ", object.get_parent())
+	#print($HeldItemContainer/HeldItem/Candle.Sprite.name)
+
+	
 func getClampedPosition():
 	var pos = Vector2(position.x, position.y)
 	var upperbounds = level_size/2 - (viewportSize/2)
@@ -115,9 +132,11 @@ func getClampedPosition():
 	
 var lastMeleeTime = 0
 func _input(event):
-	if event is InputEventMouseButton:
-		yield(get_tree().create_timer(0.2), "timeout")
-		if lastMeleeTime < OS.get_ticks_msec() - (meleeCooldown * 1000) and not state == PlayerState.DEAD:
+	if event is InputEventMouseButton and event.pressed == true:
+		if is_instance_valid(heldItem) and lastGrabTime + (noThrowAfterGrabTime*1000) < OS.get_ticks_msec():
+			heldItem.linear_velocity += $HeldItemContainer.get_global_transform().x.normalized() * throwForce
+			heldItem = null
+		elif lastMeleeTime < OS.get_ticks_msec() - (meleeCooldown * 1000) and not state == PlayerState.DEAD:
 			lastMeleeTime = OS.get_ticks_msec()
 			$HeldItemContainer/HeldItem/Melee.set_collision_mask(1)
 			$HeldItemContainer/HeldItem/Melee/MeleeSprite.play("swing")
@@ -129,8 +148,6 @@ func _input(event):
 			$HeldItemContainer/HeldItem/Melee.set_collision_mask(0)
 	elif event is InputEventMouseMotion:
 		$HeldItemContainer.look_at(GlobalVars.camera.get_global_mouse_position())
-		
-	
 
 
 
