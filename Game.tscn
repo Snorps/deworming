@@ -6,13 +6,13 @@
 [ext_resource path="res://Assets/Sprites/bg1intestinessmall.png" type="Texture" id=4]
 [ext_resource path="res://Shaders/CandleLight.tres" type="Material" id=5]
 [ext_resource path="res://Scripts/LightSource.gd" type="Script" id=6]
+[ext_resource path="res://Camera.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Sprites/nodule.png" type="Texture" id=6]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 1082.61, -62.3988, 0, 0, 0, 0, 1082.61, 624.286, 0, 0, 0, 0, -175.396, 645.323, 0, 0, 0, 0, -267.126, -26.2402, 0, 0, 0, 0, 1080.8, -59.4404 )
+"points": PoolVector2Array( 0, 0, 0, 0, 1073.57, -53.5237, 0, 0, 0, 0, 1089.11, 555.133, 0, 0, 0, 0, 1082.61, 624.286, 0, 0, 0, 0, -175.396, 645.323, 0, 0, 0, 0, -158.81, -68.7836, 0, 0, 0, 0, 1027.53, -39.3719 )
 }
-
-[sub_resource type="ImageTexture" id=2]
 
 [node name="Game" type="Node" groups=["Game"]]
 script = ExtResource( 1 )
@@ -31,33 +31,23 @@ one_shot = true
 position = Vector2( 542, 287 )
 
 [node name="MobPath" type="Path2D" parent="."]
-position = Vector2( -626.842, -580.173 )
-scale = Vector2( 2.21303, 3.04215 )
+position = Vector2( -10571, -7603.36 )
+scale = Vector2( 23.6663, 29.3332 )
 curve = SubResource( 1 )
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
-position = Vector2( 522.316, 633.656 )
-rotation = 3.12488
-offset = 1246.82
-
-[node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 538, 286 )
-
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-rect_rotation = -88.0547
-rect_scale = Vector2( 5, 5 )
-size_flags_stretch_ratio = 0.62
-texture = SubResource( 2 )
-stretch_mode = 2
+position = Vector2( -164.383, 171.154 )
+rotation = -1.54757
+offset = 2404.43
 
 [node name="Background" type="Node2D" parent="."]
 z_index = -10
 
-[node name="TextureRect" type="TextureRect" parent="Background"]
-margin_right = 1030.0
-margin_bottom = 607.0
+[node name="BackgroundTexture" type="TextureRect" parent="Background"]
+margin_left = -4233.0
+margin_top = -2152.0
+margin_right = 3778.0
+margin_bottom = 2508.0
 texture = ExtResource( 4 )
 expand = true
 stretch_mode = 2
@@ -76,6 +66,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -1.0
 margin_right = -1.0
+
+[node name="Nodule" type="Sprite" parent="."]
+position = Vector2( -1.52588e-05, 3.99998 )
+scale = Vector2( 0.273684, 0.289474 )
+texture = ExtResource( 6 )
+
+[node name="Camera2D" parent="." instance=ExtResource( 5 )]
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 538, 286 )
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]

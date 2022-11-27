@@ -10,8 +10,9 @@ var game
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$MusicPlayer.stream = music
-	$MusicPlayer.play()
+	pass
+	#$MusicPlayer.stream = music
+	#$MusicPlayer.play()
 
 func _input(event):
 	if event is InputEventMouseButton:
