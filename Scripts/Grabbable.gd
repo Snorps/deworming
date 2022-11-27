@@ -7,8 +7,9 @@ func _ready():
 
 
 func _on_Grabbable_input_event(viewport, event, shape_idx):
-	print("clickd")
+	if event is InputEventMouseButton and event.pressed == true:
+		GlobalVars.player.grab(self.owner)
 
 
 func _on_Grabbable_mouse_entered():
-	print("weed eater")
+	GlobalVars.grabItem = self

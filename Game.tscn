@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
-[ext_resource path="res://Grabbable.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Candle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Level.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Camera.tscn" type="PackedScene" id=5]
@@ -51,8 +51,8 @@ position = Vector2( 538, 286 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
-[node name="Grabbable" parent="." instance=ExtResource( 2 )]
-position = Vector2( 433, 204 )
+[node name="Candle" parent="." instance=ExtResource( 2 )]
+position = Vector2( 378, 188 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 5 )]
 

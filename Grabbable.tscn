@@ -4,7 +4,7 @@
 
 [sub_resource type="CircleShape2D" id=1]
 
-[node name="Grabbable" type="Area2D"]
+[node name="GrabPoint" type="Area2D"]
 z_index = 100
 script = ExtResource( 1 )
 
