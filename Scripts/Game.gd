@@ -38,7 +38,5 @@ func _on_MobTimer_timeout():
 	else:
 		mobPos.y = ls.y/2
 
-	print(ls/2, mobPos)
-
 	mob.position = mobPos
 	add_child(mob)
