@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
-[ext_resource path="res://Mob.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Level.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Camera.tscn" type="PackedScene" id=5]
@@ -14,7 +13,6 @@ _data = {
 
 [node name="Game" type="Node" groups=["Game"]]
 script = ExtResource( 1 )
-mobScene = ExtResource( 2 )
 levelScene = ExtResource( 4 )
 
 [node name="MobTimer" type="Timer" parent="."]

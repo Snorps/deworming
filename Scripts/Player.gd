@@ -32,9 +32,10 @@ func _ready():
 
 
 var ticksSinceHurt = 15
-func _on_Player_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	if ticksSinceHurt <= 0 and body.filename == "res://Mob.tscn" and state != PlayerState.DEAD:
-		if body.state != body.State.dead:
+func _on_Player_area_entered(area):
+	print(area.name)
+	if ticksSinceHurt <= 0 and area.name == "AttackHitbox" and state != PlayerState.DEAD:
+		if area.get_owner().state != area.get_owner().State.DEAD:
 			ticksSinceHurt = 65
 			emit_signal("hit")
 			health = health - 1
@@ -118,13 +119,14 @@ func _input(event):
 		yield(get_tree().create_timer(0.2), "timeout")
 		if lastMeleeTime < OS.get_ticks_msec() - (meleeCooldown * 1000) and not state == PlayerState.DEAD:
 			lastMeleeTime = OS.get_ticks_msec()
-			$HeldItemContainer/HeldItem/Melee.set_collision_layer_bit(0, 1)
+			$HeldItemContainer/HeldItem/Melee.set_collision_mask(1)
 			$HeldItemContainer/HeldItem/Melee/MeleeSprite.play("swing")
 			$SoundPlayer.stream = slashSound1
 			$SoundPlayer.play()
 			var time_in_seconds = 0.03
 			yield(get_tree().create_timer(time_in_seconds), "timeout")
 			velocity += $HeldItemContainer.get_global_transform().x.normalized() * meleeCarrythrough
+			$HeldItemContainer/HeldItem/Melee.set_collision_mask(0)
 	elif event is InputEventMouseMotion:
 		$HeldItemContainer.look_at(GlobalVars.camera.get_global_mouse_position())
 		
@@ -137,4 +139,3 @@ func _on_Melee_animation_finished():
 	var t = Timer.new()
 	t.set_wait_time(1)
 	$HeldItemContainer/HeldItem/Melee.set_collision_layer_bit(0, 0)
-

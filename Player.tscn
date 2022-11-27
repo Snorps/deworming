@@ -94,5 +94,4 @@ pause_mode = 2
 volume_db = -15.0
 
 [connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
-[connection signal="body_shape_entered" from="." to="." method="_on_Player_body_shape_entered"]
 [connection signal="animation_finished" from="HeldItemContainer/HeldItem/Melee/MeleeSprite" to="." method="_on_Melee_animation_finished"]

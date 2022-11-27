@@ -1,6 +1,6 @@
 extends Node
 
-export(PackedScene) var mobScene
+#export(PackedScene) var mobScene
 export(PackedScene) var levelScene
 var score
 var floors
@@ -41,23 +41,23 @@ func _on_StartTimer_timeout():
 	$ScoreTimer.start()
 	
 	
-func _on_MobTimer_timeout():
-	var mob = mobScene.instance()
-	var ls = GlobalVars.levelSize
-	#var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
-	#mob_spawn_location.offset = randi()
-	
-	var mobPos = Vector2(randf()*ls.x, randf()*ls.y)
-	mobPos = mobPos - (ls/2)
-
-	if randf() > 0.75:
-		mobPos.x = -ls.x/2
-	elif randf() > 0.5:
-		mobPos.y = -ls.y/2
-	elif randf() > 0.25:
-		mobPos.x = ls.x/2
-	else:
-		mobPos.y = ls.y/2
-
-	mob.position = mobPos
-	level.add_child(mob)
+#func _on_MobTimer_timeout():
+#	var mob = mobScene.instance()
+#	var ls = GlobalVars.levelSize
+#	#var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
+#	#mob_spawn_location.offset = randi()
+#
+#	var mobPos = Vector2(randf()*ls.x, randf()*ls.y)
+#	mobPos = mobPos - (ls/2)
+#
+#	if randf() > 0.75:
+#		mobPos.x = -ls.x/2
+#	elif randf() > 0.5:
+#		mobPos.y = -ls.y/2
+#	elif randf() > 0.25:
+#		mobPos.x = ls.x/2
+#	else:
+#		mobPos.y = ls.y/2
+#
+#	mob.position = mobPos
+#	level.add_child(mob)

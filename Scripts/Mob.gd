@@ -1,15 +1,22 @@
-extends RigidBody2D
+extends Area2D
 
 signal hit
 
-enum State {dead, default}
-var state
+enum State {DEAD, DEFAULT}
 var rand = RandomNumberGenerator.new()
 
-func _on_Area2D_area_entered(area):
-	if area.name == "Melee" and not state == State.dead:
+export var velocityStep = 20
+export var velocityMultiplier = 0.9
+export var visionDistance = 400
+
+var state
+var velocity = Vector2.ZERO
+
+
+func _on_Mob_area_entered(area):
+	if area.name == "Melee" and not state == State.DEAD:
 		$AnimatedSprite.play("dead")
-		state = State.dead
+		state = State.DEAD
 		emit_signal("hit")
 		
 		set_collision_layer_bit(0, 1)
@@ -22,34 +29,33 @@ func _on_Area2D_area_entered(area):
 		yield(get_tree().create_timer(time_in_seconds), "timeout")
 		get_tree().paused = false
 		$AnimatedSprite.material.set_shader_param("active", false)
+	
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-var velocity
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	rand.randomize()
 	
-	velocity = rand_range(150.0, 250.0)
 	
-	look_at(GlobalVars.player.position)
-	var r = rand.randfn(0.1, 0.4) * 30
-	rotation_degrees = rotation_degrees + r
-	
-	set_linear_velocity(get_global_transform().x.normalized() * velocity)
-	
+func _process(delta):
+	if state != State.DEAD:
+		var walkingdir = Vector2.ZERO
+		var p = GlobalVars.player
+		if p.position.x > position.x:
+			walkingdir.x += 1
+		if p.position.x < position.x:
+			walkingdir.x -= 1
+		if p.position.y > position.y:
+			walkingdir.y += 1
+		if p.position.y < position.y:
+			walkingdir.y -= 1
+			
+		if position.distance_to(GlobalVars.player.position) > visionDistance:
+			walkingdir = Vector2.ZERO
+			
+		velocity += walkingdir.normalized() * velocityStep
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-#func flip():
-#	look_at(GlobalVars.player.position)
-#	set_linear_velocity(get_global_transform().x.normalized() * velocity)
-#
-#func _process(_delta):
-#	var ls = GlobalVars.levelSize
-#	if abs(position.x) > ls.x/2 or abs(position.y) > ls.y/2:
-#		flip()
+		velocity = velocity * velocityMultiplier
+		
+		position += velocity * delta
+		
+		#position.x = clamp(position.x, -level_size.x/2, level_size.x/2)
+		#position.y = clamp(position.y, -level_size.y/2, level_size.y/2)
