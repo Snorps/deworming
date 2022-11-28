@@ -49,19 +49,20 @@ func _on_Mob_area_entered(area):
 
 func projectileHit(body):
 	if abs(body.linear_velocity.x) > 20 or abs(body.linear_velocity.y) > 20:
-		body.linear_velocity = body.linear_velocity * 0.6 #reduce candle velocity
-		state = State.STUNNED
-		$StunSprite.visible = true
-		showDamage(body.get_global_position())
-		
-		yield(get_tree().create_timer(stunTime), "timeout") # wait several seconds
-		
-		if state == State.STUNNED: #if still stunned, unstun
-			$StunSprite.visible = false
-			state = State.DEFAULT
+		if state != State.DEAD:
+			body.linear_velocity = body.linear_velocity * 0.6 #reduce candle velocity
+			state = State.STUNNED
+			$StunSprite.visible = true
+			showDamage(body.get_global_position())
+			
+			yield(get_tree().create_timer(stunTime), "timeout") # wait several seconds
+			
+			if state == State.STUNNED: #if still stunned, unstun
+				$StunSprite.visible = false
+				state = State.DEFAULT
 
 func _on_Mob_body_entered(body):
-	if body.name == "Candle" and state != State.DEAD:
+	if body.name == "Candle" and state:
 		if GlobalVars.player.heldItem != body: #messyyy
 			projectileHit(body)
 
