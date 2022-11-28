@@ -66,14 +66,15 @@ visible = false
 position = Vector2( 1, -56 )
 scale = Vector2( 0.221053, 0.221053 )
 frames = SubResource( 3 )
+frame = 2
 playing = true
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-volume_db = -10.0
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
+volume_db = -35.0
 stream_paused = true
 
-[node name="DiePlayer" type="AudioStreamPlayer2D" parent="."]
-volume_db = -15.0
+[node name="DiePlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -35.0
 
 [connection signal="area_entered" from="." to="." method="_on_Mob_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_Mob_body_entered"]

@@ -38,7 +38,7 @@ func _ready():
 var ticksSinceHurt = 15
 func _on_Player_area_entered(area):
 	if ticksSinceHurt <= 0 and area.name == "AttackHitbox" and state != PlayerState.DEAD:
-		if area.get_owner().state == area.get_owner().State.DEFAULT:
+		if area.get_owner().state == area.get_owner().State.AGGRO:
 			ticksSinceHurt = 65
 			emit_signal("hit")
 			health = health - 1
