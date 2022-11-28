@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/deworming_ost_looping.mp3-5fe259301cc22aa4979e23fb88c09809.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/deworming_ost_looping.mp3"
+dest_files=[ "res://.import/deworming_ost_looping.mp3-5fe259301cc22aa4979e23fb88c09809.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
