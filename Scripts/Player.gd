@@ -31,7 +31,6 @@ var velocity = Vector2.ZERO # The player's movement vector.
 var viewportSize
 
 func _ready():
-	viewportSize = get_viewport().size
 	GlobalVars.player = self
 
 
@@ -58,8 +57,10 @@ func _on_Player_area_entered(area):
 
 
 func _process(delta):
+	viewportSize = get_viewport().size
 	ticksSinceHurt = ticksSinceHurt - 1
-	if health <= 0 and state != PlayerState.DEAD:
+	
+	if health <= 0 and state != PlayerState.DEAD: #die if no health
 		$WailPlayer.stream = hurtSoundLast
 		$WailPlayer.play()
 		
@@ -68,10 +69,18 @@ func _process(delta):
 		state = PlayerState.DEAD
 		GlobalVars.state = GlobalVars.State.GAME_OVER
 	
-	if is_instance_valid(heldItem):
-		heldItem.position = $HeldItemContainer/HeldItem.get_global_position()
+	if is_instance_valid(heldItem): #set held item position
+		var displacement = get_global_position() - $HeldItemContainer/HeldItem.get_global_position()
+		var direction = displacement.normalized()
+		
+		var distance = get_global_position().distance_to(get_global_mouse_position())
+		distance = clamp(distance, 0, viewportSize.y/2.5)
+		var distance_mapped = distance/(viewportSize.y/2.5)
+		print(distance)
+		var maximum = 80
+		heldItem.position = get_global_position() + (direction * (-distance_mapped*maximum))
 	
-	if state != PlayerState.DEAD:
+	if state != PlayerState.DEAD: #if alive, do player input logic
 		var walkingdir = Vector2.ZERO
 		if Input.is_action_pressed("move_right"):
 			walkingdir.x += 1
