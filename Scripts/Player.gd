@@ -34,12 +34,15 @@ var viewportSize
 func _ready():
 	GlobalVars.player = self
 
-
 var ticksSinceHurt = 15
+func giveIframes():
+	ticksSinceHurt = 65
+
+
 func _on_Player_area_entered(area):
 	if ticksSinceHurt <= 0 and area.name == "AttackHitbox" and state != PlayerState.DEAD:
 		if area.get_owner().state == area.get_owner().State.AGGRO:
-			ticksSinceHurt = 65
+			giveIframes()
 			emit_signal("hit")
 			health = health - 1
 			
