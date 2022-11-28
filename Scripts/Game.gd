@@ -38,6 +38,10 @@ func new_game():
 func _on_StartTimer_timeout():
 	$ScoreTimer.start()
 	
+func _input(event):
+	if event is InputEventMouseButton and event.pressed == true:
+		if is_instance_valid(GlobalVars.grabItem):
+			GlobalVars.player.grab(GlobalVars.grabItem)
 	
 #func _on_MobTimer_timeout():
 #	var mob = mobScene.instance()

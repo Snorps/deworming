@@ -6,6 +6,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if GlobalVars.grabItem == self:
+		$Sprite.material.set_shader_param("active", true)
+	else:
+		$Sprite.material.set_shader_param("active", false)
+	
 	if position.x > (GlobalVars.levelSize.x/2):
 		position.x = (GlobalVars.levelSize.x/2)
 	elif position.x < (-GlobalVars.levelSize.x/2):
