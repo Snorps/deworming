@@ -34,13 +34,13 @@ var viewportSize
 func _ready():
 	GlobalVars.player = self
 
-var ticksSinceHurt = 15
+var iframes = 15
 func giveIframes():
-	ticksSinceHurt = 65
+	iframes = 65
 
 
 func _on_Player_area_entered(area):
-	if ticksSinceHurt <= 0 and area.name == "AttackHitbox" and state != PlayerState.DEAD:
+	if iframes <= 0 and area.name == "AttackHitbox" and state != PlayerState.DEAD:
 		if area.get_owner().state == area.get_owner().State.AGGRO:
 			giveIframes()
 			emit_signal("hit")
@@ -62,7 +62,7 @@ func _on_Player_area_entered(area):
 
 func _process(delta):
 	viewportSize = get_viewport().size
-	ticksSinceHurt = ticksSinceHurt - 1
+	iframes = iframes - 1
 	
 	if health <= 0 and state != PlayerState.DEAD: #die if no health
 		$WailPlayer.stream = hurtSoundLast
