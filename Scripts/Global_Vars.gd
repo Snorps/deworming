@@ -9,3 +9,9 @@ var grabItem = null
 
 enum State {GAME_OVER, PLAYING, NEXT_LEVEL, MENU}
 var state = State.MENU
+
+var speechBubble
+
+func speech_next ():
+	if (is_instance_valid(speechBubble)):
+		speechBubble.next()

@@ -121,6 +121,7 @@ func _process(delta):
 var lastGrabTime = 0
 var noThrowAfterGrabTime = 0.001
 func grab(object):
+	GlobalVars.speech_next()
 	heldItem = object
 	lastGrabTime = OS.get_ticks_msec()
 
