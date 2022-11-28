@@ -12,7 +12,7 @@ export var velocityStep = 20
 export var velocityMultiplier = 0.9
 export var visionDistance = 400
 export var stunTime = 3
-export var health = 3
+export var health = 2
 
 var state
 var velocity = Vector2.ZERO
@@ -48,9 +48,9 @@ func _on_Mob_area_entered(area):
 		health = health - 1
 
 func projectileHit(body):
-	if abs(body.linear_velocity.x) > 20 or abs(body.linear_velocity.y) > 20:
+	if abs(body.linear_velocity.x) > 50 or abs(body.linear_velocity.y) > 50:
 		if state != State.DEAD:
-			body.linear_velocity = body.linear_velocity * 0.6 #reduce candle velocity
+			body.linear_velocity = body.linear_velocity * 0.5 #reduce candle velocity
 			state = State.STUNNED
 			$StunSprite.visible = true
 			showDamage(body.get_global_position())
