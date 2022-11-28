@@ -2,14 +2,17 @@ extends Area2D
 
 signal hit
 
-enum State {DEAD, DEFAULT, STUNNED}
+var roarSound = preload("res://Assets/Sounds/roar.wav")
+var dieSound = preload("res://Assets/Sounds/mobdie.wav")
+
+enum State {DEAD, DEFAULT, STUNNED, AGGRO}
 var rand = RandomNumberGenerator.new()
 
 export var velocityStep = 20
 export var velocityMultiplier = 0.9
 export var visionDistance = 400
 export var stunTime = 3
-export var health = 2
+export var health = 3
 
 var state
 var velocity = Vector2.ZERO
@@ -29,6 +32,9 @@ func showDamage(pos):
 func _on_Mob_area_entered(area):
 	if area.name == "Melee" and state != State.DEAD:
 		if health <= 1 or state == State.STUNNED:
+			$DiePlayer.stream = dieSound
+			$DiePlayer.play()
+			
 			$AnimatedSprite.play("dead")
 			
 			state = State.DEAD
@@ -42,7 +48,7 @@ func _on_Mob_area_entered(area):
 		health = health - 1
 
 func projectileHit(body):
-	if abs(body.linear_velocity.x) > 0.5 or abs(body.linear_velocity.y) > 0.5:
+	if abs(body.linear_velocity.x) > 20 or abs(body.linear_velocity.y) > 20:
 		body.linear_velocity = body.linear_velocity * 0.6 #reduce candle velocity
 		state = State.STUNNED
 		$StunSprite.visible = true
@@ -65,9 +71,15 @@ func _ready():
 	state = State.DEFAULT
 	rand.randomize()
 	
-	
+var hasRoared = false
 func _process(delta):
-	if state == State.DEFAULT:
+	if state == State.DEFAULT and position.distance_to(GlobalVars.player.position) < visionDistance:
+		state = State.AGGRO
+	if not hasRoared and position.distance_to(GlobalVars.player.position) < 300:
+		hasRoared = true
+		$AudioStreamPlayer2D.stream = roarSound
+		$AudioStreamPlayer2D.play()
+	if state == State.AGGRO:
 		var walkingdir = Vector2.ZERO
 		var p = GlobalVars.player
 		if p.position.x > position.x:
@@ -78,9 +90,7 @@ func _process(delta):
 			walkingdir.y += 1
 		if p.position.y < position.y:
 			walkingdir.y -= 1
-			
-		if position.distance_to(GlobalVars.player.position) > visionDistance:
-			walkingdir = Vector2.ZERO
+
 			
 		velocity += walkingdir.normalized() * velocityStep
 

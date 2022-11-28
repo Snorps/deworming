@@ -2,6 +2,8 @@ extends Node
 
 export(PackedScene) var gameScene
 
+var playSound = preload("res://Assets/Sounds/Slash.wav")
+
 var gameOverSound = preload("res://Assets/Sounds/GameOver.wav")
 
 var game
@@ -9,9 +11,9 @@ var game
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
-	#$MusicPlayer.stream = music
-	#$MusicPlayer.play()
+	get_tree().paused = true #audio wont play unless we do this for some reason
+	get_tree().paused = false
+
 
 var processedGameOver = false
 func _input(event):
