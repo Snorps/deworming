@@ -13,9 +13,11 @@ func _ready():
 	#$MusicPlayer.stream = music
 	#$MusicPlayer.play()
 
+var processedGameOver = false
 func _input(event):
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and event.pressed == true:
 		if GlobalVars.state == GlobalVars.State.MENU:
+			processedGameOver = false
 			GlobalVars.state = GlobalVars.State.PLAYING
 			game = gameScene.instance()
 			add_child(game)
@@ -23,10 +25,11 @@ func _input(event):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if GlobalVars.state == GlobalVars.State.GAME_OVER:
-		GlobalVars.state = GlobalVars.State.MENU
+	if GlobalVars.state == GlobalVars.State.GAME_OVER and processedGameOver == false:
+		processedGameOver = true
 		$SoundPlayer.stream = gameOverSound
 		$SoundPlayer.play()
 		yield(get_tree().create_timer(5), "timeout")
 		if is_instance_valid(game):
 			game.queue_free()
+			GlobalVars.state = GlobalVars.State.MENU

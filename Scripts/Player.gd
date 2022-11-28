@@ -15,7 +15,7 @@ enum PlayerState {DEFAULT, DEAD}
 var state = PlayerState.DEFAULT
 var heldItem = null
 
-export var health = 5
+export var health = 1
 export var velocityStep = 80 
 export var velocityMultiplier = 0.8
 export var meleeCooldown = 0.2
@@ -123,6 +123,8 @@ func grab(object):
 
 	
 func getClampedPosition():
+	if level_size == null or viewportSize == null:
+		return Vector2.ZERO
 	var pos = Vector2(position.x, position.y)
 	var upperbounds = level_size/2 - (viewportSize/2)
 	var lowerbounds = -level_size/2 + (viewportSize/2)
@@ -133,7 +135,7 @@ func getClampedPosition():
 	
 	pos.x = clamp(pos.x, lowerbounds.x, upperbounds.x)
 	pos.y = clamp(pos.y, lowerbounds.y, upperbounds.y)
-		
+	
 	return pos
 	
 var lastMeleeTime = 0
