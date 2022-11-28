@@ -1,5 +1,6 @@
 extends Node2D
 
+var grabRange = 150
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,7 +13,8 @@ func _ready():
 	
 
 func _on_Grabbable_mouse_entered():
-	GlobalVars.grabItem = self.get_parent()
+	if GlobalVars.player.get_global_position().distance_to(get_global_position()) < grabRange:
+		GlobalVars.grabItem = self.get_parent()
 
 
 func _on_GrabPoint_mouse_exited():
