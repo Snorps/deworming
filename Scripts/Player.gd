@@ -15,7 +15,7 @@ enum PlayerState {DEFAULT, DEAD}
 var state = PlayerState.DEFAULT
 var heldItem = null
 
-export var health = 5
+export var health = 1
 export var velocityStep = 80 
 export var velocityMultiplier = 0.8
 export var meleeCooldown = 0.2

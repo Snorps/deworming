@@ -23,15 +23,17 @@ func _input(event):
 			GlobalVars.state = GlobalVars.State.PLAYING
 			game = gameScene.instance()
 			add_child(game)
+		elif GlobalVars.state == GlobalVars.State.GAME_OVER:
+			GlobalVars.state = GlobalVars.State.MENU
+			if is_instance_valid(game):
+				game.queue_free()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if GlobalVars.state == GlobalVars.State.GAME_OVER and processedGameOver == false:
 		processedGameOver = true
+		yield(get_tree().create_timer(1), "timeout")
+		GlobalVars.camera.gameOver()
 		$SoundPlayer.stream = gameOverSound
 		$SoundPlayer.play()
-		yield(get_tree().create_timer(5), "timeout")
-		if is_instance_valid(game):
-			game.queue_free()
-			GlobalVars.state = GlobalVars.State.MENU
