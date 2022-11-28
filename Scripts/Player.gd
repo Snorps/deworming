@@ -141,6 +141,8 @@ func _input(event):
 	if event is InputEventMouseButton and event.pressed == true:
 		if is_instance_valid(heldItem) and lastGrabTime + (noThrowAfterGrabTime*1000) < OS.get_ticks_msec():
 			heldItem.linear_velocity += $HeldItemContainer.get_global_transform().x.normalized() * calculatedThrowForce
+			#uhhhhh like
+			#get overlapping bodies of candle grabpoint and then loop through to find Mobs and call their projectileHit function
 			heldItem = null
 		elif lastMeleeTime < OS.get_ticks_msec() - (meleeCooldown * 1000) and not state == PlayerState.DEAD:
 			lastMeleeTime = OS.get_ticks_msec()

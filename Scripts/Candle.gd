@@ -6,6 +6,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if GlobalVars.player.heldItem == self:
+		$GrabPoint.set_collision_layer(0)
+	else:
+		$GrabPoint.set_collision_layer(1)
+	
 	if GlobalVars.grabItem == self:
 		$Sprite.material.set_shader_param("active", true)
 	else:
