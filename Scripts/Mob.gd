@@ -46,6 +46,7 @@ func _on_Mob_body_entered(body):
 	if body.name == "Candle" and state != State.DEAD:
 		if GlobalVars.player.heldItem != body: #messyyy
 			if abs(body.linear_velocity.x) > 0.5 or abs(body.linear_velocity.y) > 0.5:
+				body.linear_velocity = body.linear_velocity*0.6 #reduce candle velocity
 				state = State.STUNNED
 				$StunSprite.visible = true
 				showDamage(body.get_global_position())
