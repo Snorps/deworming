@@ -6,5 +6,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if position.x > (GlobalVars.levelSize.x/2):
+		position.x = (GlobalVars.levelSize.x/2)
+	elif position.x < (-GlobalVars.levelSize.x/2):
+		position.x = -(GlobalVars.levelSize.x/2)
 	
+	if position.y > (GlobalVars.levelSize.y/2):
+		position.y = (GlobalVars.levelSize.y/2)
+	elif position.y < (-GlobalVars.levelSize.y/2):
+		position.y = -(GlobalVars.levelSize.y/2)

@@ -22,6 +22,7 @@ export var meleeCooldown = 0.2
 export var meleeCarrythrough = 500
 
 export var throwForce = 2000
+var calculatedThrowForce
 
 
 var level_size = GlobalVars.levelSize
@@ -76,7 +77,7 @@ func _process(delta):
 		var distance = get_global_position().distance_to(get_global_mouse_position())
 		distance = clamp(distance, 0, viewportSize.y/2.5)
 		var distance_mapped = distance/(viewportSize.y/2.5)
-		print(distance)
+		calculatedThrowForce = throwForce * distance_mapped
 		var maximum = 80
 		heldItem.position = get_global_position() + (direction * (-distance_mapped*maximum))
 	
@@ -139,7 +140,7 @@ var lastMeleeTime = 0
 func _input(event):
 	if event is InputEventMouseButton and event.pressed == true:
 		if is_instance_valid(heldItem) and lastGrabTime + (noThrowAfterGrabTime*1000) < OS.get_ticks_msec():
-			heldItem.linear_velocity += $HeldItemContainer.get_global_transform().x.normalized() * throwForce
+			heldItem.linear_velocity += $HeldItemContainer.get_global_transform().x.normalized() * calculatedThrowForce
 			heldItem = null
 		elif lastMeleeTime < OS.get_ticks_msec() - (meleeCooldown * 1000) and not state == PlayerState.DEAD:
 			lastMeleeTime = OS.get_ticks_msec()

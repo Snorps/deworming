@@ -2,7 +2,7 @@ extends Node
 
 export(PackedScene) var mobScene
 export(PackedScene) var holeScene
-export var mobDensity = 0
+export var mobDensity = 0.2
 
 func randomSign():
 	return (round(randf())*2)-1
