@@ -13,7 +13,9 @@ func _ready():
 	
 
 func _on_Grabbable_mouse_entered():
-	if GlobalVars.player.get_global_position().distance_to(get_global_position()) < grabRange:
+	var dist = GlobalVars.player.get_global_position().distance_to(get_global_position())
+	print(dist)
+	if dist < grabRange:
 		GlobalVars.grabItem = self.get_parent()
 
 
