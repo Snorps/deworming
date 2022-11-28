@@ -59,12 +59,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="SoundPlayer" type="AudioStreamPlayer" parent="."]
-pause_mode = 2
-volume_db = -15.0
-stream_paused = true
-
-[node name="GameLink" type="Label" parent="."]
+[node name="GameLink" type="Label" parent="Node2D"]
 margin_left = 509.0
 margin_top = 158.0
 margin_right = 711.0
@@ -73,7 +68,7 @@ rect_pivot_offset = Vector2( 1.5, 1.5 )
 custom_fonts/font = SubResource( 1 )
 text = "snorps.net/deworming"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="RichTextLabel" type="RichTextLabel" parent="Node2D"]
 margin_left = 794.0
 margin_top = -14.0
 margin_right = 1059.0
@@ -127,7 +122,12 @@ Soundtrack
 
 "
 
-[node name="Title" type="Sprite" parent="."]
+[node name="Title" type="Sprite" parent="Node2D"]
 position = Vector2( 497, 120 )
 scale = Vector2( 0.762747, 0.762747 )
 texture = ExtResource( 4 )
+
+[node name="SoundPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+volume_db = -15.0
+stream_paused = true

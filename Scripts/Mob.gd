@@ -50,7 +50,7 @@ func _on_Mob_area_entered(area):
 func projectileHit(body):
 	if abs(body.linear_velocity.x) > 50 or abs(body.linear_velocity.y) > 50:
 		if state != State.DEAD:
-			body.linear_velocity = body.linear_velocity * 0.5 #reduce candle velocity
+			body.linear_velocity = body.linear_velocity * 0.7 #reduce candle velocity
 			state = State.STUNNED
 			$StunSprite.visible = true
 			showDamage(body.get_global_position())
