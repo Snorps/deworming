@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Sprites/speechbubble.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Fonts/Roboto_Small.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Scripts/SpeechBubble.gd" type="Script" id=3]
+
+[node name="SpeechBubble" type="TextureRect"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+script = ExtResource( 3 )
+text = [ "Pick me up!", "Throw me to stun!", "Find the hole!" ]
+
+[node name="BubbleTextLabel" type="RichTextLabel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 35.0
+margin_top = 38.0
+margin_right = -33.0
+margin_bottom = -25.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_colors/selection_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[center]Test![/center]"
+text = "Test!"

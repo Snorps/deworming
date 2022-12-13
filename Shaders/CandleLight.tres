@@ -12,4 +12,7 @@ shader_param/circleFadeSize = 110.0
 shader_param/circleFadeOuterSize = 120.0
 shader_param/circleDarknessSize = 130.0
 shader_param/bwRimSize = 0.0
+shader_param/time = null
+shader_param/waveStrength = 0.01
+shader_param/waveSpeed = 1.0
 shader_param/vignetteTexture = ExtResource( 2 )
