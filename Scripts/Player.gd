@@ -110,12 +110,9 @@ func _process(delta):
 			
 		if velocity.x != 0:
 			$AnimatedSprite.animation = "walk"
-			$AnimatedSprite.flip_v = false
-			# See the note below about boolean assignment.
-			$AnimatedSprite.flip_h = velocity.x < 0
+			$AnimatedSprite.flip_v = false	
 		elif velocity.y != 0:
 			$AnimatedSprite.animation = "default"
-			$AnimatedSprite.flip_v = velocity.y > 0
 	
 	
 var lastGrabTime = 0
@@ -159,6 +156,10 @@ func _input(event):
 		elif lastMeleeTime < OS.get_ticks_msec() - (meleeCooldown * 1000) and not state == PlayerState.DEAD:
 			lastMeleeTime = OS.get_ticks_msec()
 			$HeldItemContainer/HeldItem/Melee.set_collision_mask(1)
+			if $HeldItemContainer/HeldItem/Melee/MeleeSprite.flip_v == false:
+				$HeldItemContainer/HeldItem/Melee/MeleeSprite.flip_v = true;
+			else:
+				$HeldItemContainer/HeldItem/Melee/MeleeSprite.flip_v = false;
 			$HeldItemContainer/HeldItem/Melee/MeleeSprite.play("swing")
 			$SoundPlayer.stream = slashSound1
 			$SoundPlayer.play()
@@ -167,7 +168,12 @@ func _input(event):
 			velocity += $HeldItemContainer.get_global_transform().x.normalized() * meleeCarrythrough
 			$HeldItemContainer/HeldItem/Melee.set_collision_mask(0)
 	elif event is InputEventMouseMotion:
-		$HeldItemContainer.look_at(GlobalVars.camera.get_global_mouse_position())
+		var mousepos = GlobalVars.camera.get_global_mouse_position()
+		$HeldItemContainer.look_at(mousepos)
+		if mousepos.x > $AnimatedSprite.get_global_position().x:
+			$AnimatedSprite.flip_h = false;
+		else:
+			$AnimatedSprite.flip_h = true;
 
 
 
