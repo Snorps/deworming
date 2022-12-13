@@ -39,6 +39,7 @@ offset = 2404.43
 z_index = -10
 
 [node name="Nodule" type="Sprite" parent="."]
+visible = false
 position = Vector2( -1.52588e-05, 3.99998 )
 scale = Vector2( 0.273684, 0.289474 )
 texture = ExtResource( 6 )
